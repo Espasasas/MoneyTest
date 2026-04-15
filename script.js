@@ -25,8 +25,13 @@ const ctaVariants = [
   { id: "C", copy: "Hacer test de riqueza ahora" }
 ];
 
-const questions = [
+const QUESTION_COUNT = 7;
+const QUESTION_HISTORY_KEY = "moneytest_recent_questions";
+const QUESTION_HISTORY_LIMIT = 28;
+
+const questionPool = [
   {
+    id: "q01",
     text: "Si recibes 10,000 EUR inesperados, que haces primero?",
     options: [
       { text: "Los invierto en una oportunidad que entiendo", profile: "investor", score: 18 },
@@ -35,6 +40,7 @@ const questions = [
     ]
   },
   {
+    id: "q02",
     text: "Cuando hay una crisis economica, tu reaccion es:",
     options: [
       { text: "Buscar activos en descuento", profile: "investor", score: 16 },
@@ -43,6 +49,7 @@ const questions = [
     ]
   },
   {
+    id: "q03",
     text: "Tu tolerancia al riesgo se parece mas a:",
     options: [
       { text: "Riesgo calculado con datos y control", profile: "investor", score: 15 },
@@ -51,6 +58,7 @@ const questions = [
     ]
   },
   {
+    id: "q04",
     text: "Que habito te representa mejor?",
     options: [
       { text: "Sigo mercados y tendencias financieras", profile: "investor", score: 15 },
@@ -59,6 +67,7 @@ const questions = [
     ]
   },
   {
+    id: "q05",
     text: "Tu objetivo principal con el dinero es:",
     options: [
       { text: "Crear patrimonio estable y creciente", profile: "investor", score: 16 },
@@ -67,6 +76,7 @@ const questions = [
     ]
   },
   {
+    id: "q06",
     text: "En una semana productiva ideal, tu enfoque seria:",
     options: [
       { text: "Analizar numeros, retorno y oportunidades", profile: "investor", score: 15 },
@@ -75,14 +85,116 @@ const questions = [
     ]
   },
   {
+    id: "q07",
     text: "Si tuvieras que multiplicar tus ingresos en 12 meses:",
     options: [
       { text: "Diversifico inversiones en instrumentos solidos", profile: "investor", score: 16 },
       { text: "Creo una oferta premium y la escalo", profile: "entrepreneur", score: 20 },
       { text: "Construyo un sistema de crecimiento sostenible", profile: "visionary", score: 18 }
     ]
+  },
+  {
+    id: "q08",
+    text: "Cuando ganas mas dinero de lo esperado, normalmente:",
+    options: [
+      { text: "Aumento ahorro e inversion de forma inmediata", profile: "investor", score: 17 },
+      { text: "Lo reinvierto en crecer mas rapido", profile: "entrepreneur", score: 19 },
+      { text: "Lo distribuyo segun un plan anual de crecimiento", profile: "visionary", score: 18 }
+    ]
+  },
+  {
+    id: "q09",
+    text: "Que tipo de contenido consumes mas?",
+    options: [
+      { text: "Analisis de mercados y finanzas", profile: "investor", score: 16 },
+      { text: "Ventas, marketing y escalado de negocios", profile: "entrepreneur", score: 19 },
+      { text: "Estrategia, liderazgo y vision de futuro", profile: "visionary", score: 17 }
+    ]
+  },
+  {
+    id: "q10",
+    text: "Si una decision financiera sale mal, que haces?",
+    options: [
+      { text: "Reviso datos y ajusto con disciplina", profile: "investor", score: 16 },
+      { text: "Cambio rapido y pruebo otra jugada", profile: "entrepreneur", score: 18 },
+      { text: "Aprendo el patron y redefino estrategia", profile: "visionary", score: 17 }
+    ]
+  },
+  {
+    id: "q11",
+    text: "Que te motiva mas para generar riqueza?",
+    options: [
+      { text: "Seguridad financiera y libertad", profile: "investor", score: 16 },
+      { text: "Escalar fuerte y competir alto", profile: "entrepreneur", score: 20 },
+      { text: "Crear un legado con impacto", profile: "visionary", score: 18 }
+    ]
+  },
+  {
+    id: "q12",
+    text: "Como gestionas tu tiempo de alto rendimiento?",
+    options: [
+      { text: "Bloques para analizar y tomar decisiones", profile: "investor", score: 15 },
+      { text: "Priorizo ejecucion y cierres rapidos", profile: "entrepreneur", score: 19 },
+      { text: "Combino estrategia, foco y revision semanal", profile: "visionary", score: 18 }
+    ]
+  },
+  {
+    id: "q13",
+    text: "Cuando ves una oportunidad nueva, primero:",
+    options: [
+      { text: "Valido riesgo, liquidez y retorno", profile: "investor", score: 16 },
+      { text: "Entro antes que los demas y pruebo", profile: "entrepreneur", score: 20 },
+      { text: "Evaluo si encaja con mi vision global", profile: "visionary", score: 17 }
+    ]
+  },
+  {
+    id: "q14",
+    text: "En tu circulo, suelen verte como alguien que:",
+    options: [
+      { text: "Administra dinero con inteligencia", profile: "investor", score: 16 },
+      { text: "Mueve proyectos y hace que pasen cosas", profile: "entrepreneur", score: 19 },
+      { text: "Piensa en grande y marca direccion", profile: "visionary", score: 18 }
+    ]
+  },
+  {
+    id: "q15",
+    text: "Tu plan ideal de riqueza en 5 anos incluye:",
+    options: [
+      { text: "Portafolio diversificado y flujo estable", profile: "investor", score: 17 },
+      { text: "Empresa escalada con ingresos altos", profile: "entrepreneur", score: 20 },
+      { text: "Sistema de ingresos + impacto sostenido", profile: "visionary", score: 18 }
+    ]
+  },
+  {
+    id: "q16",
+    text: "Que te define mas en decisiones importantes?",
+    options: [
+      { text: "Paciencia y analisis racional", profile: "investor", score: 15 },
+      { text: "Velocidad y valentia para actuar", profile: "entrepreneur", score: 19 },
+      { text: "Claridad estrategica y vision", profile: "visionary", score: 18 }
+    ]
+  },
+  {
+    id: "q17",
+    text: "Si tuvieras que elegir una ventaja clave seria:",
+    options: [
+      { text: "Consistencia financiera", profile: "investor", score: 16 },
+      { text: "Capacidad de ejecutar bajo presion", profile: "entrepreneur", score: 20 },
+      { text: "Detectar tendencias antes que otros", profile: "visionary", score: 17 }
+    ]
+  },
+  {
+    id: "q18",
+    text: "Para ti, riqueza real significa:",
+    options: [
+      { text: "Capital que trabaja para ti", profile: "investor", score: 17 },
+      { text: "Ingresos altos y crecimiento acelerado", profile: "entrepreneur", score: 19 },
+      { text: "Libertad, impacto y decisiones con sentido", profile: "visionary", score: 18 }
+    ]
   }
 ];
+
+let currentQuestions = [];
 
 const profileConfig = {
   visionary: {
@@ -111,9 +223,51 @@ const profilePoints = {
 };
 
 const scoreRange = {
-  min: questions.length * 15,
-  max: questions.length * 20
+  min: QUESTION_COUNT * 15,
+  max: QUESTION_COUNT * 20
 };
+
+function shuffleArray(items) {
+  const clone = [...items];
+  for (let i = clone.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [clone[i], clone[j]] = [clone[j], clone[i]];
+  }
+  return clone;
+}
+
+function getRecentQuestionIds() {
+  try {
+    const raw = localStorage.getItem(QUESTION_HISTORY_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function storeRecentQuestionIds(questionIds) {
+  try {
+    const previous = getRecentQuestionIds();
+    const merged = [...questionIds, ...previous].slice(0, QUESTION_HISTORY_LIMIT);
+    localStorage.setItem(QUESTION_HISTORY_KEY, JSON.stringify(merged));
+  } catch {
+    // Ignore storage errors (private mode or storage blocked).
+  }
+}
+
+function buildQuestionSet() {
+  const recentIds = new Set(getRecentQuestionIds());
+  const freshQuestions = questionPool.filter((question) => !recentIds.has(question.id));
+  const fallbackQuestions = questionPool.filter((question) => recentIds.has(question.id));
+
+  const orderedFresh = shuffleArray(freshQuestions);
+  const orderedFallback = shuffleArray(fallbackQuestions);
+  const picked = [...orderedFresh, ...orderedFallback].slice(0, QUESTION_COUNT);
+
+  currentQuestions = shuffleArray(picked);
+  storeRecentQuestionIds(currentQuestions.map((question) => question.id));
+}
 
 function trackEvent(eventName, params = {}) {
   const payload = { event: eventName, ...params };
@@ -160,10 +314,10 @@ function showScreen(target) {
 }
 
 function renderQuestion() {
-  const current = questions[questionIndex];
-  const progress = ((questionIndex + 1) / questions.length) * 100;
+  const current = currentQuestions[questionIndex];
+  const progress = ((questionIndex + 1) / currentQuestions.length) * 100;
 
-  questionCounter.textContent = `Pregunta ${questionIndex + 1} de ${questions.length}`;
+  questionCounter.textContent = `Pregunta ${questionIndex + 1} de ${currentQuestions.length}`;
   progressBar.style.width = `${progress}%`;
   questionTitle.textContent = current.text;
   optionsList.innerHTML = "";
@@ -189,7 +343,7 @@ function selectOption(option) {
 
   questionIndex += 1;
 
-  if (questionIndex < questions.length) {
+  if (questionIndex < currentQuestions.length) {
     renderQuestion();
     return;
   }
@@ -272,6 +426,7 @@ function showResult() {
 }
 
 function resetQuiz() {
+  buildQuestionSet();
   questionIndex = 0;
   totalScore = 0;
   Object.keys(profilePoints).forEach((key) => {
