@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoneyTest - Que tipo de millonario eres</title>
+  <meta name="description" content="Descubre que tipo de millonario eres en un test rapido de 30 segundos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <div id="confetti-layer" class="confetti-layer" aria-hidden="true"></div>
+    <section id="screen-start" class="screen screen-active">
+      <div class="badge">MONEYTEST</div>
+      <h1>Descubre que tipo de millonario eres <span>💰</span></h1>
+      <p class="subtitle">Un test rapido de 30 segundos</p>
+      <button id="start-btn" class="btn btn-primary">Empezar</button>
+
+      <div class="ad-slot ad-slot-top">
+        <p>Espacio para anuncio (AdSense)</p>
+      </div>
+    </section>
+
+    <section id="screen-quiz" class="screen" aria-hidden="true">
+      <header class="quiz-header">
+        <p id="question-counter" class="question-counter">Pregunta 1 de 7</p>
+        <div class="progress-track">
+          <div id="progress-bar" class="progress-fill"></div>
+        </div>
+      </header>
+
+      <article class="question-card">
+        <h2 id="question-title"></h2>
+        <div id="options-list" class="options-list"></div>
+      </article>
+    </section>
+
+    <section id="screen-result" class="screen" aria-hidden="true">
+      <p class="result-label">Tu perfil millonario es:</p>
+      <h2 id="result-profile"></h2>
+      <p id="result-description" class="result-description"></p>
+
+      <div class="potential-card">
+        <p>Potencial de ingresos futuros</p>
+        <strong id="result-potential"></strong>
+      </div>
+
+      <div class="rank-card">
+        <p class="rank-label">Ranking de mentalidad</p>
+        <strong id="result-rank"></strong>
+        <div class="rank-track">
+          <div id="rank-fill" class="rank-fill"></div>
+        </div>
+      </div>
+
+      <p class="result-message">Tu mentalidad define tu futuro.</p>
+
+      <div class="share-block">
+        <p class="share-title">Comparte tu resultado</p>
+        <p id="share-copy" class="share-copy"></p>
+        <div class="share-buttons">
+          <button class="btn btn-share" data-share="whatsapp">WhatsApp</button>
+          <button class="btn btn-share" data-share="tiktok">TikTok</button>
+          <button class="btn btn-share" data-share="instagram">Instagram</button>
+        </div>
+      </div>
+
+      <button id="restart-btn" class="btn btn-secondary">Repetir test</button>
+
+      <div class="ad-slot ad-slot-bottom">
+        <p>Espacio para anuncio (AdSense / Afiliados)</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
